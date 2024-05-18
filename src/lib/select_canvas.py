@@ -2,6 +2,7 @@ from pynput import mouse
 from pynput import keyboard
 
 class Canvas:
+    # Constructor
     def __init__(self):
         self.mouses = mouse.Controller()
         self.keys_listener = keyboard.Listener(on_press=self.on_press)
@@ -20,7 +21,11 @@ class Canvas:
         self.canvas_lower_left = None
         self.canvas_upper_right = None
 
-        
+    # Stop the listener
+    def stop(self):
+        self.keys_listener.stop()
+
+    # Function called when a key is pressed
     def on_press(self, key):
         try:
             if key.char == 'r':
@@ -48,6 +53,7 @@ class Canvas:
         except AttributeError:
             pass
 
+    # Print all the points
     def print_points(self):
         print(f'R_max: {self.R_max}')
         print(f'R_min: {self.R_min}')
@@ -61,6 +67,7 @@ class Canvas:
         print(f'Canvas lower left: {self.canvas_lower_left}')
         print(f'Canvas upper right: {self.canvas_upper_right}')
 
+    # Return all the points in a dictionary
     def get_points(self):
         return {
             'R_max': self.R_max,
@@ -76,6 +83,7 @@ class Canvas:
             'canvas_upper_right': self.canvas_upper_right
         }
     
+    # Return True if all the points are set
     def is_all_points_set(self):
         return self.R_max is not None and self.R_min is not None and self.G_max is not None and self.G_min is not None and self.B_max is not None and self.B_min is not None and self.change_color_point_plus is not None and self.change_color_point_cross is not None and self.canvas_upper_left is not None and self.canvas_lower_left is not None and self.canvas_upper_right is not None
     
