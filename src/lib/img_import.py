@@ -3,6 +3,10 @@
 
 from PIL import Image
 import matplotlib.pyplot as plt
+import cv2
+import numpy as np
+from sklearn.cluster import KMeans
+
 
 def import_image(path: str) -> Image:
     """
@@ -59,3 +63,24 @@ def color_decomplex(pixels: list[list[int]], bits: int) -> list[list[int]]:
             pixels[i][j] = tuple(new_pixel)
 
     return pixels
+
+def color_reductor(pixels: list[list[int]], number_of_colors: int) -> list[list[int]]:
+    """
+    Reduce the number of colors of the image with 
+    """
+    # Convert the image to a numpy array for the KMeans
+    height, width = len(pixels), len(pixels[0])
+    image = np.array([list(pixels[i][j]) for i in range(height) for j in range(width)])  
+
+    # Use KMeans to reduce the number of colors
+    kmeans = KMeans(n_clusters=number_of_colors, random_state=0).fit(image)
+    new_colors = kmeans.cluster_centers_.astype(int)
+    labels = kmeans.labels_
+
+    # Replace the colors of the image
+    for i in range(len(pixels)):
+        for j in range(len(pixels[i])):
+            pixels[i][j] = tuple(new_colors[labels[i * width + j]])
+
+    return pixels
+
