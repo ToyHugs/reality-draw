@@ -3,3 +3,6 @@ venv/
 
 # Ignore all __pycache__ directories
 **/__pycache__/
+
+# Ignore test images
+test_images/

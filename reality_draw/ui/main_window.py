@@ -1,28 +1,36 @@
 import tkinter as tk
-from reality_draw.core.calculator import add_numbers
+from tkinter import filedialog  # Import pour la boîte de dialogue de fichier
 
-class MainWindow:
-    def __init__(self, root):
+class MainWindow(object):
+    def __init__(self, root: tk.Tk):
         self.root = root
-        self.root.title("Exemple Tkinter App")
-        self.root.geometry("300x150")
+        self.root.title("Reality Draw")
 
-        self.entry1 = tk.Entry(root)
-        self.entry2 = tk.Entry(root)
-        self.result_label = tk.Label(root, text="Résultat: ")
+        # Create a frame for the main content
+        self.main_frame = tk.Frame(self.root)
+        self.main_frame.pack(fill=tk.BOTH, expand=True)
 
-        self.entry1.pack(pady=5)
-        self.entry2.pack(pady=5)
+        # Create a label for the title
+        self.title_label = tk.Label(self.main_frame, text="Reality Draw", font=("Helvetica", 24))
+        self.title_label.pack(pady=20)
 
-        self.calc_button = tk.Button(root, text="Additionner", command=self.calculate)
-        self.calc_button.pack(pady=5)
-        self.result_label.pack(pady=5)
+        # Create a button to start drawing
+        self.draw_button = tk.Button(self.main_frame, text="Start Drawing", command=self.start_drawing)
+        self.draw_button.pack(pady=10)
 
-    def calculate(self):
-        try:
-            num1 = float(self.entry1.get())
-            num2 = float(self.entry2.get())
-            result = add_numbers(num1, num2)
-            self.result_label.config(text=f"Résultat: {result}")
-        except ValueError:
-            self.result_label.config(text="Entrée invalide")
+        # Create a button to upload an image
+        self.upload_button = tk.Button(self.main_frame, text="Upload Image", command=self.upload_image)
+        self.upload_button.pack(pady=10)
+
+    def start_drawing(self):
+        # Placeholder for drawing functionality
+        print("Drawing started!")
+
+    def upload_image(self):
+        # Ouvrir une boîte de dialogue pour sélectionner un fichier
+        file_path = filedialog.askopenfilename(
+            title="Select an Image",
+            filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")]
+        )
+        if file_path:
+            print(f"Image selected: {file_path}")

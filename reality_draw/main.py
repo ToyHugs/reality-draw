@@ -1,7 +1,7 @@
 from reality_draw.ui.main_window import MainWindow
 import tkinter as tk
 
-class RealityDrawApp:
+class RealityDrawApp(object):
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Reality Draw")
