@@ -13,13 +13,8 @@ class MainWindow(object):
 
         # Create a label for the title
         self.title_label = tk.Label(
-            self.main_frame, text="Reality Draw", font=("Helvetica", 24))
+            self.main_frame, text="Reality Draw", font=("Arial", 24))
         self.title_label.pack(pady=20)
-
-        # Create a button to start drawing
-        self.draw_button = tk.Button(
-            self.main_frame, text="Start Drawing", command=self.start_drawing)
-        self.draw_button.pack(pady=10)
 
         # Create a button to upload an image
         self.upload_button = tk.Button(
